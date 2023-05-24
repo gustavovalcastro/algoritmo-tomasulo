@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="instructionName">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Noto Sans Adlam</family>
+            <pointsize>20</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(143, 240, 164);
+color: rgb(0, 0, 0);</string>
+          </property>
+          <property name="text">
+           <string>Instruction</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="instructionCycles">
+          <property name="font">
+           <font>
+            <family>Noto Sans Adlam</family>
+            <pointsize>20</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(153, 193, 241);
+color: rgb(0, 0, 0);</string>
+          </property>
+          <property name="text">
+           <string>N° of cycles</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="InstructionsScroll" name="instructionsScroll">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>384</width>
+           <height>470</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="mainLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <item>
+       <widget class="InstructionsList" name="instructionsList" native="true"/>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QPushButton" name="stepButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>24</pointsize>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Step</string>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="openFile"/>
+    <addaction name="exitApp"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="openFile">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="exitApp">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>InstructionsList</class>
+   <extends>QWidget</extends>
+   <header>widgets/instructions_list.h</header>
+   <container>1</container>
+   <slots>
+    <slot>update_instructions(QVariantList,QVariantList)</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>InstructionsScroll</class>
+   <extends>QScrollArea</extends>
+   <header>widgets/instructions_scroll.h</header>
+   <container>1</container>
+   <slots>
+    <signal>tomasulo_finalized()</signal>
+    <signal>tomasulo_step_taken(QVariantList,QVariantList)</signal>
+    <slot>add_instructions(QString)</slot>
+    <slot>tomasulo_step()</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>openFile</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>load_instructions_from_system()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MainWindow</sender>
+   <signal>instructions_loaded(QString)</signal>
+   <receiver>instructionsScroll</receiver>
+   <slot>add_instructions(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>194</x>
+     <y>308</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>stepButton</sender>
+   <signal>pressed()</signal>
+   <receiver>instructionsScroll</receiver>
+   <slot>tomasulo_step()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>789</x>
+     <y>62</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>194</x>
+     <y>321</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>instructionsScroll</sender>
+   <signal>tomasulo_finalized()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>tomasulo_finalized()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>194</x>
+     <y>321</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>exitApp</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>instructionsScroll</sender>
+   <signal>tomasulo_step_taken(QVariantList,QVariantList)</signal>
+   <receiver>instructionsList</receiver>
+   <slot>update_instructions(QVariantList,QVariantList)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>202</x>
+     <y>321</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>596</x>
+     <y>324</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <signal>instructions_loaded(QString)</signal>
+  <slot>load_instructions_from_system()</slot>
+  <slot>tomasulo_finalized()</slot>
+ </slots>
+</ui>
