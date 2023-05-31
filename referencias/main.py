@@ -16,7 +16,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__(parent)
         self.setupUi(self)
 
-        self.setWindowTitle('Tomasulu Visual')
+        self.setWindowTitle('Simulador do Algoritmo de Tomasulo')
         self.showMaximized()
         self.stepButton.setEnabled(False)
 
@@ -28,9 +28,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             msg = QMessageBox()
 
             msg.setIcon(QMessageBox.Icon.Critical)
-            msg.setText("A simulation is still in progress, do you want to start a new one?")
-            msg.setInformativeText("Click \'Ok\' to progress, and \'Cancel\' to continue the current simulation")
-            msg.setWindowTitle("Tomasulo in Proccess")
+            msg.setText("A simulação se encontra em progresso. Deseja continuar?")
+            msg.setInformativeText("Clique em \'Ok\' para progredir, e \'Cancel\' para continuar na simulação atual")
+            msg.setWindowTitle("Simulação em Progresso")
             msg.setStandardButtons(QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
             msg.setDefaultButton(QMessageBox.StandardButton.Ok)
 
@@ -43,9 +43,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         file_path = QFileDialog.getOpenFileName(
                     self,
-                    str("Open instructions"),
+                    str("Abrir instruções"),
                     OsUtils.get_user_home(),
-                    filter="Text files (*.txt)")[0]
+                    filter="Arquivos de texto (*.txt)")[0]
 
         if not file_path:
             return 
