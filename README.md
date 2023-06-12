@@ -2,7 +2,7 @@
 
 
 
-`Engenharia de Computação` `Instituo de Ciências Exatas e Informática - ICEI`
+`Engenharia de Computação` `Instituo de Ciências Exatas e Informática - ICEI`<br>
 `Arquitetura de Computadores III` `5º PERÍODO`
 
 Este trabalho consiste no desenvolvimento de um programa que simule o funcionamento do algoritmo de Tomasulo e seus conceitos relacionados à superescalaridade respeitando a ISA RISC-V.
