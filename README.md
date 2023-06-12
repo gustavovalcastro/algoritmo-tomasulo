@@ -1,5 +1,5 @@
 # algoritmo-tomasulo
-Algoritmo de Tomasulo
+Algoritmo de Tomasulo!
 
 ## Importante
 O projeto está no diretório "toma". Para instalar as dependências, execute o comando:
