@@ -2,7 +2,7 @@
 
 
 
-`Engenharia de Computação` `ICEI` `Arquitetura de Computadores III` `5º PERÍODO`
+`ICEI` `Engenharia de Computação` `Arquitetura de Computadores III` `5º PERÍODO`
 
 Este trabalho consiste no desenvolvimento de um programa que simule o funcionamento do algoritmo de Tomasulo e seus conceitos relacionados à superescalaridade respeitando a ISA RISC-V.
 O livro base consultado é "Arquitetura de Computadores, uma Abordagem Quantitativa", de Hennessy e Patterson. 
