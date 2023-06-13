@@ -1,0 +1,62 @@
+from utils import *
+import sys
+
+reorder_buffer = new_reorder(8)
+reservation_stations = new_reservation()
+register_status = new_registers(8)
+        
+
+cycle = 0
+branch = sys.argv[1]
+next = "y"
+flush = []
+
+reorder_buffer = fetch_instructions(reorder_buffer, "")
+dependencies = check_dependencies(reorder_buffer)
+
+print_tables(reorder_buffer, reservation_stations, register_status, cycle, branch)
+
+print("Continue? No [n] or Yes [any]: ")
+next = input()
+
+while next != "n":
+    cycle += 1
+
+    issue_registers(reorder_buffer, reservation_stations, dependencies)
+    execute_instructions(reorder_buffer, reservation_stations)
+    write_instructions(reorder_buffer, reservation_stations, dependencies, register_status, branch)
+    flush = commit_instructions(reorder_buffer, register_status, branch)
+    print_tables(reorder_buffer, reservation_stations, register_status, cycle, branch)
+
+    if flush[0] == "flush":
+        print('label ' + flush[1])
+        # reorder_buffer.clear()
+        # reservation_stations.clear()
+        # register_status.clear()
+        # dependencies.clear()
+        reorder_buffer = []
+        reservation_stations = []
+        register_status = []
+        dependencies = []
+
+        # rbf = new_reorder(8)
+        # rstn = new_reservation()
+        # rsts = new_registers(8)
+
+        # reservation_stations = rstn
+        # register_status = rsts
+        reorder_buffer = new_reorder(8)
+        reservation_stations = new_reservation()
+        register_status = new_registers(8)
+
+        reorder_buffer = fetch_instructions(reorder_buffer, flush[1])
+        dependencies = check_dependencies(reorder_buffer)
+        flush = ["", ""]
+
+        print_tables(reorder_buffer, reservation_stations, register_status, cycle, branch)
+
+    # for i in dependencies:
+        # i.print()
+
+    print("Continue? No [n] or Yes [any]: ")
+    next = input()
