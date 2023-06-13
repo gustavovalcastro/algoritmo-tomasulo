@@ -94,12 +94,21 @@ loop: lw x0, 0(x1)
 """
 
 instructions = [
-            Instruction("lw", "x0", "0", "", "x1", "loop", 5),
-            Instruction("add", "x1", "", "x2", "x3", "", 3),
+            Instruction("lw", "x0", "0", "", "x1", "", 5),
+            Instruction("add", "x1", "", "x2", "x3", "loop", 3),
             Instruction("sw", "", "0", "x1", "x2", "", 4),
             Instruction("sub", "x2", "", "x1", "x3", "", 3),
             Instruction("mul", "x2", "", "x5", "x6", "", 3),
-            Instruction("lw", "x1", "0", "", "x2", "", 5),
             Instruction("bne", "loop", "", "x2", "x3", "", 2),
-            Instruction("div", "x2", "", "x7", "x3", "", 3),
+            Instruction("lw", "x7", "0", "", "x2", "", 5),
+            Instruction("div", "x1", "", "x7", "x3", "", 3),
+
+            # Instruction("lw", "x0", "0", "", "x1", "loop", 1),
+            # Instruction("add", "x1", "", "x2", "x3", "", 1),
+            # Instruction("sw", "", "0", "x1", "x2", "", 1),
+            # Instruction("sub", "x2", "", "x1", "x3", "", 1),
+            # Instruction("mul", "x2", "", "x5", "x6", "", 1),
+            # Instruction("bne", "loop", "", "x2", "x3", "", 1),
+            # Instruction("lw", "x7", "0", "", "x2", "", 1),
+            # Instruction("div", "x1", "", "x7", "x3", "", 1),
         ]
