@@ -34,7 +34,7 @@ O livro base consultado é "Arquitetura de Computadores, uma Abordagem Quantitat
 
 ### Importante
 
-O projeto está no diretório "toma". Para instalar as dependências, execute o comando:
+Para instalar as dependências, execute o comando:
 ```
 pip install tabulate
 ```
@@ -42,9 +42,13 @@ Para uma formatação visual e agradável de dados tabulares em Python, utilizan
 
 
 ## Execução do projeto
-
+### Com desvio
 ```
-python main.py yes
+python main.py Yes
+```
+### Sem desvio (No pode ser qualquer outro string)
+```
+python main.py No
 ```
 A interface formatada será carregada na tela do usuário assim que o programa for executado
 
@@ -57,4 +61,4 @@ A interface formatada será carregada na tela do usuário assim que o programa f
 
 # Código
 
-<li><a href="https://github.com/gustavovalcastro/algoritmo-tomasulo/tree/main/toma"> Código Fonte</a></li>
+<li><a href="https://github.com/gustavovalcastro/algoritmo-tomasulo/"> Código Fonte</a></li>

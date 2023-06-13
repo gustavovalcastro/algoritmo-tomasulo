@@ -226,7 +226,8 @@ def exec(reorder_buffer, buff_entry):
 
 def execute_instructions(reorder_buffer, reservation_stations):
     for station in reservation_stations:
-        if station.busy == "Yes" and station.changed == "No":
+        # if station.busy == "Yes" and station.changed == "No":
+        if station.busy == "Yes":
             instr = get_instruction(reorder_buffer, station.dest)
 
             if station.op == "lw":
@@ -269,7 +270,7 @@ def verify_write(entry, station, dependencies, id):
 def to_entry(entry):
     return "#{}".format(entry)
 
-def write(reorder_buffer, buff_entry, dependencies, reservation_stations, register_status, cycle, branch):
+def write(reorder_buffer, buff_entry, dependencies, var_dependencies, reservation_stations, register_status, cycle, branch):
     for id, entry in enumerate(reorder_buffer):
         if buff_entry == entry.entry:
             for register in register_status:
@@ -324,22 +325,24 @@ def write(reorder_buffer, buff_entry, dependencies, reservation_stations, regist
             elif entry.instruction.op == "bne":
                 if entry.entry > 0:
                     reorder_buffer[entry.entry - 1].flush_after = branch
-                    print_tables(reorder_buffer, reservation_stations, register_status, cycle, branch, "Same cycle, right before commit of last instruction and branch")
+                    if branch == "Yes":
+                        print_tables(reorder_buffer, reservation_stations, register_status, cycle, branch, "[WARNING] Waiting for previous instruction to commit in order to branch")
 
-                    print("Continue? No [n] or Yes [any]: ")
-                    next = input()
+                        print("Continue? No [n] or Yes [any]: ")
+                        next = input()
 
-            # for instruction in dependencies:
-            #     if instruction.vj == entry.entry: instruction.vj = ""
-            #     if instruction.vk == entry.entry: instruction.vk = ""
+            for instruction in var_dependencies:
+                if instruction.vj == entry.entry: instruction.vj = ""
+                if instruction.vk == entry.entry: instruction.vk = ""
 
-def write_instructions(reorder_buffer, reservation_stations, dependencies, register_status, cycle, branch):
+def write_instructions(reorder_buffer, reservation_stations, dependencies, var_dependencies, register_status, cycle, branch):
     for id, station in enumerate(reservation_stations):
-        if station.busy == "Yes" and station.changed == "No":
+        # if station.busy == "Yes" and station.changed == "No":
+        if station.busy == "Yes":
             instr = get_instruction(reorder_buffer, station.dest)
 
             if instr['remaining_cycles'] <= 0:
-                write(reorder_buffer, instr['entry'], dependencies, reservation_stations, register_status, cycle, branch)
+                write(reorder_buffer, instr['entry'], dependencies, var_dependencies, reservation_stations, register_status, cycle, branch)
                 reservation_stations[id] = ReservationEntry(station.name, "No", "", "", "", "", "", "", "", station.type, "Yes")
 
 def commit(entry, register_status):
